@@ -1,13 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 //mentioning function in advance in order to avoid an error 
 int length(char*);
+char* concat(char*, char*);
 
 //%d defining a type with %d
 
-// int main(){
-//     printf("%d", length("foo bar "));
-// }
+int main(){
+     printf("%s", concat("foo bar ", "foo"));
+ }
 
 int length(char*x){
     int i;
@@ -19,6 +21,39 @@ int length(char*x){
 
 
 // "abc"+"de"  -> "abcde"
+
+/*
+abc
+012
+
+de
+01
+
+abcde
+01234
+
+valgrind
+
+*/
+
+char* concat(char* x, char* y){
+	int lenx = length(x);
+	int leny = length(y);
+	int out_length = lenx + leny;
+	char* mem = malloc((out_length+1)*sizeof(char));
+	for (int i = 0; i < lenx; i++){
+		mem[i] = x[i];
+	}
+	for (int i = 0; i < leny; i++){
+		mem[lenx+i] = y[i];
+	}
+	mem[out_length] = '\0';
+	return mem;
+}
+
+
+//32
+
 
 // for(int i =0; i< length(s); i++)
 
@@ -68,9 +103,9 @@ int is_beginning(char* x, char* y){
 
 int is_palindrome(char*);
 
-int main(){
-printf("%d", is_palindrome("abcddcba"));
-}
+//int main(){
+//printf("%d", is_palindrome("abcddcba"));
+//}
 
 	
 int is_palindrome(char* x){
