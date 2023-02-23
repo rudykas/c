@@ -20,7 +20,8 @@ char* dup_string(char*, int);
 char* appendr_char(char*, char);
 char* appendl_char(char*, char);
 char* int_to_string(int);
-
+char* cp_str(char*);
+int str_to_int(char*);
 
 //%d defining a type with %d
 
@@ -28,12 +29,28 @@ int main(){
 /*	printf("%s\n", dup_string("abc",3));
 	printf("%s\n", appendr_char("abc",'d'));
 	printf("%s\n", appendl_char("abc",'d'));*/ 
-	printf("%s", int_to_string(197));
+	//printf("%s", int_to_string(19712121));
+	printf("%d", str_to_int("19118821"));
 	//printf("%s",reverse("abc"));
 }
 
+
+int str_to_int(char* a){
+	int x = 0;
+	int len = length(a);
+	int tenth = 1;
+	while (len > 0){
+		x = x + tenth*(a[len-1]-48);
+		len = len - 1;
+		tenth = 10*tenth;
+	}
+	return x;
+}
+
+
+
 char* int_to_string(int x){
-    char* out = "";
+    char* out = cp_str("");
     while (x > 0){
     	int a = x%10;
     	x = x/10;
@@ -43,6 +60,18 @@ char* int_to_string(int x){
 }
 
 // in-place
+
+// copy string 
+char* cp_str(char* s){
+    int len = length(s);
+	char* out = malloc(len*sizeof+1);
+	for (int i =0; i < len+1; i++){
+		out[i]=s[i];
+	}
+	out[len]= '\0';
+	return out;
+}
+
 
 
 char* appendl_char(char* x, char y){
@@ -55,6 +84,7 @@ char* appendl_char(char* x, char y){
 		mem[j] = x[j-1];
 	}
 	mem[lenx+1] = '\0'; 
+	free(x);
 	return mem;
 }
 
