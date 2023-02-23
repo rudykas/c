@@ -58,6 +58,9 @@ int main()
 
 
 
+
+
+
   while (1){
     draw_snake();
     mvaddstr(ya, xa, "a");
