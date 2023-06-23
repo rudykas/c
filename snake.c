@@ -35,7 +35,7 @@ int main()
 {  
   initscr();      /* Start curses mode       */
   refresh();      /* Print it on to the real screen */
-  mvaddstr(10, 10, "s"); //add charecter to position 10, 10
+  mvaddstr(10, 10, "s"); //add character to position 10, 10
 
   
   getmaxyx(stdscr, ymax, xmax); // finding size of the screen:
@@ -46,7 +46,7 @@ int main()
 
 
   
-  srand(time(NULL));
+  srand(time(NULL)); //toask ehit is time null? 
   int ya = rand()%ymax; //random coordinates of apple
   int xa = rand()%xmax;
 
@@ -55,8 +55,6 @@ int main()
   //getch();        /* Wait for user input */
   int y = 10;
   int x = 10;
-
-
 
   while (1){
     draw_snake();
@@ -80,7 +78,6 @@ int main()
   	//todo hw 1. char instead of Hello world. - done 
     //2. borders behaviour, make screen as a tor
 
-
     // border behaviour 
     if (x == xmax){
       x = 0; 
@@ -97,7 +94,6 @@ int main()
 
     step_snake_add(y,x);
     
-    
     //create new apple when ate
     if (x == xa & y == ya){ 
       ya = rand()%ymax; 
@@ -105,10 +101,11 @@ int main()
     }
     else {step_snake_remove();}
 
-
-    
+      
   	erase();
   }
   endwin();       /* End curses mode      */
   return 0;
 }
+
+//to compile clang snake.c -lncurses
