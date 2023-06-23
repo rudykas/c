@@ -3,8 +3,8 @@
 #include<stdlib.h>
 #include <time.h>
 
-int ymax, xmax;
-int* xs;
+int ymax, xmax; //siza of screen 
+int* xs; //xs of snake
 int* ys;
 int length;
 
@@ -55,9 +55,6 @@ int main()
   //getch();        /* Wait for user input */
   int y = 10;
   int x = 10;
-
-
-
 
 
 
