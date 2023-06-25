@@ -10,7 +10,7 @@ int length;
 
 
 void draw_snake(){ 
-    for (int i=0; i == length; i++){
+    for (int i=0; i < length+1; i++){ //toask why i coul be equal lenth if array has only length elements?
         mvaddstr(ys[i], xs[i], "s"); //1st - y, 2nd - x
     }	
 }
@@ -24,8 +24,9 @@ void step_snake_add(int y,int x){
 }
 
 void step_snake_remove(){
-    for (int i=1; i == length-1; i++){
+    for (int i=1; i < length; i++){
     	xs[i-1] = xs[i];
+        ys[i-1] = ys[i];
     }
 	length--;
 }
@@ -35,7 +36,7 @@ int main()
 {  
   initscr();      /* Start curses mode       */
   refresh();      /* Print it on to the real screen */
-  mvaddstr(10, 10, "s"); //add character to position 10, 10
+  // mvaddstr(10, 10, "s"); //add character to position 10, 10
 
   
   getmaxyx(stdscr, ymax, xmax); // finding size of the screen:
@@ -46,7 +47,7 @@ int main()
 
 
   
-  srand(time(NULL)); //toask ehit is time null? 
+  srand(time(NULL)); //toask what means time null? 
   int ya = rand()%ymax; //random coordinates of apple
   int xa = rand()%xmax;
 
@@ -55,6 +56,10 @@ int main()
   //getch();        /* Wait for user input */
   int y = 10;
   int x = 10;
+
+  ys[0] = y;
+  xs[0] = x;
+
 
   while (1){
     draw_snake();
@@ -98,8 +103,9 @@ int main()
     if (x == xa & y == ya){ 
       ya = rand()%ymax; 
       xa = rand()%xmax;
+      //length++;
     }
-    else {step_snake_remove();}
+    else {step_snake_remove();} #toask when is this row executeted? 
 
       
   	erase();
