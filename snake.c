@@ -3,14 +3,14 @@
 #include<stdlib.h>
 #include <time.h>
 
-int ymax, xmax; //siza of screen 
+int ymax, xmax; //size of screen 
 int* xs; //xs of snake
 int* ys;
 int length;
 
 
 void draw_snake(){ 
-    for (int i=0; i < length+1; i++){ //toask why i coul be equal lenth if array has only length elements?
+    for (int i=0; i < length; i++){ 
         mvaddstr(ys[i], xs[i], "s"); //1st - y, 2nd - x
     }	
 }
@@ -47,7 +47,7 @@ int main()
 
 
   
-  srand(time(NULL)); //toask what means time null? 
+  srand(time(NULL)); //toask what means time null? - to randomize rand
   int ya = rand()%ymax; //random coordinates of apple
   int xa = rand()%xmax;
 
@@ -57,26 +57,33 @@ int main()
   int y = 10;
   int x = 10;
 
-  ys[0] = y;
-  xs[0] = x;
+  step_snake_add(y,x);
 
+  halfdelay(3);
+
+  char direction = 'd'; //initial direction
+ 
 
   while (1){
     draw_snake();
     mvaddstr(ya, xa, "a");
-  	char key = getch();
+  	int key = getch();
 
   	//moving 
-  	if (key == 'w'){
+  	if (key != -1){
+  	direction = key;
+  	}
+  	
+  	if (direction == 'w'){
   		y = y-1;
   	}
-  	else if (key == 'a'){
+  	else if (direction == 'a'){
   	  	x = x-1;
   	}
-    else if (key == 's'){
+    else if (direction == 's'){
         y = y+1;
     }
-    else if (key == 'd'){
+    else if (direction == 'd'){
         x = x+1;
     }
   	//todo add s and d - done 
@@ -100,12 +107,12 @@ int main()
     step_snake_add(y,x);
     
     //create new apple when ate
-    if (x == xa & y == ya){ 
+    if (x == xa && y == ya){ 
       ya = rand()%ymax; 
       xa = rand()%xmax;
       //length++;
     }
-    else {step_snake_remove();} #toask when is this row executeted? 
+    else {step_snake_remove();} //toask when is this row executeted? 
 
       
   	erase();
