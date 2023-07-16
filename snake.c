@@ -1,6 +1,6 @@
 #include <ncurses.h>
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include <time.h>
 
 int ymax, xmax; //size of screen 
@@ -32,6 +32,15 @@ void step_snake_remove(){
 }
 
 
+void check_crash(int y,int x){
+    for (int i=1; i < length; i++){
+        if (x == xs[i] && y == ys[i]){
+            exit(1);
+        }
+    }
+}
+
+
 int main()
 {  
   initscr();      /* Start curses mode       */
@@ -47,7 +56,7 @@ int main()
 
 
   
-  srand(time(NULL)); //toask what means time null? - to randomize rand
+  srand(time(NULL)); //toask — why exactly null? - to randomize rand ok, but why nill? 
   int ya = rand()%ymax; //random coordinates of apple
   int xa = rand()%xmax;
 
@@ -59,10 +68,9 @@ int main()
 
   step_snake_add(y,x);
 
-  halfdelay(3);
+  halfdelay(2);
 
   char direction = 'd'; //initial direction
- 
 
   while (1){
     draw_snake();
@@ -86,9 +94,11 @@ int main()
     else if (direction == 'd'){
         x = x+1;
     }
-  	//todo add s and d - done 
-  	//todo hw 1. char instead of Hello world. - done 
-    //2. borders behaviour, make screen as a tor
+  	
+
+    check_crash(y,x);
+  	
+   
 
     // border behaviour 
     if (x == xmax){
@@ -112,7 +122,7 @@ int main()
       xa = rand()%xmax;
       //length++;
     }
-    else {step_snake_remove();} //toask when is this row executeted? 
+    else {step_snake_remove();} //toask when is this row executeted? always?
 
       
   	erase();
