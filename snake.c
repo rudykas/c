@@ -35,6 +35,7 @@ void step_snake_remove(){
 void check_crash(int y,int x){
     for (int i=1; i < length; i++){
         if (x == xs[i] && y == ys[i]){
+            endwin();
             exit(1);
         }
     }
@@ -95,10 +96,8 @@ int main()
         x = x+1;
     }
   	
-
     check_crash(y,x);
   	
-   
 
     // border behaviour 
     if (x == xmax){
